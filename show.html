@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>720°找乐子</title>
+    <link rel="stylesheet" href="less/baidu-vr_e25e816.css">
+    <link rel="stylesheet" href="less/show_5848743.css">
+</head>
+<body>
+<div class="loading-layer"></div>
+<span class="ctrl-audio"></span>
+<span class="ctrl-share"></span>
+<div id="panoCanvas"></div>
+<div class="button-box">
+    <button type="button" class="btn-again"></button>
+    <button type="button" class="btn-download"></button>
+</div>
+<div class="gift-wrap">
+    <div class="gift">
+        <span id="gift-code"></span>
+        <div class="btn-open"></div>
+        <div class="btn-close"></div>
+    </div>
+</div>
+<!--百度VR app内弹框-->
+<div class="vr-alert">
+    <div>
+        <!-- <span class="alert-close"></span> -->
+    </div>
+</div>
+
+<!--<audio src="assets/bgm.mp3" id="bgm" loop="loop" controls="false" autoplay="autoplay"></audio>-->
+<audio src="assets/gift.mp3" id="giftm" controls="false">
+    <source src="assets/gift.mp3">
+</audio>
+
+<script>"use strict";
+!function (a) {
+    var c = {
+        query: function g(a, c) {
+            c = c || location.search;
+            var g = new RegExp("(\\?|#|&)" + a + "=([^&#]*)(&|#|$)"), h = c.match(g);
+            return decodeURIComponent(h ? h[2] : "")
+        }, setQuery: function h(a, c) {
+            var g = "";
+            for (var h in c) c.hasOwnProperty(h) && (g = g + "&" + h + "=" + encodeURIComponent(c[h]));
+            return "" == g ? a : (/\?/.test(a) || (g = g.replace(/\&/, "?")), a || (g = g.replace(/\?/, "")), a + g)
+        }, getQuery: function v(a, c) {
+            a = a ? a + "" : "", c = c || window.location.href.replace(window.location.hash, "");
+            var g = this.queryToJson(c);
+            return g[a] || ""
+        }, queryToJson: function w(a, c) {
+            function g(a) {
+                var g = a;
+                if (c) try {
+                    g = decodeURIComponent(a)
+                } catch (ex) {
+                }
+                return g
+            }
+
+            a = (a || window.location.href.replace(window.location.hash, "")) + "", c = "boolean" == typeof c ? c : !1;
+            for (var h = {}, v = a.substr(a.lastIndexOf("?") + 1).split("&"), i = 0; i < v.length; ++i) if (v[i]) {
+                var w = v[i].split("=");
+                if (w.length > 1) {
+                    var y = w[0], b = w[1];
+                    void 0 === h[y] ? h[y] = g(b) : ($.isArray(h[y]) || (h[y] = [h[y]]), h[y].push(g(b)))
+                }
+            }
+            return h
+        }, encodeHTML: function y(a) {
+            return String(a).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;")
+        }, jsonp: function b(c, g, h) {
+            var v = h.cb || h.callback;
+            g && (a[v] = g), h.ofmt = "jsonp";
+            var s = document.createElement("script");
+            c = this.setQuery(c, h), s.type = "text/javascript", s.src = c, document.getElementsByTagName("head")[0].appendChild(s)
+        }, getStyle: function k(a, c, g) {
+            return g = g ? g : null, window.getComputedStyle(a, g)[c]
+        }, hasClass: function C(a, c) {
+            return new RegExp(" " + c + " ").test(" " + a.className + " ")
+        }, parents: function M(a, c) {
+            for (var g = "", p = a.parentNode; null != p; p = p.parentNode) if (new RegExp(c).test(p.className)) {
+                g = p;
+                break
+            }
+            return g
+        }, getAndroidVersion: function R() {
+            var a = navigator.userAgent.match(/Android\s([0-9\.]+);/) || [];
+            return a[1]
+        }, ajax: function S(a) {
+            var c = a.method || "GET", g = a.success || "", h = a.fail || "", v = a.url || "", w = a.data;
+            if (!XMLHttpRequest) return !1;
+            var y = new XMLHttpRequest;
+            y.open(c, v, !0), "POST" == c ? y.setRequestHeader("Content-Type", "application/json") : v = this.setQuery(v, a.data), y.onreadystatechange = function () {
+                var a = "";
+                4 == y.readyState && ("string" == typeof y.responseText && (a = JSON.parse(y.responseText)), 200 == y.status ? g && g(a) : h && h(a))
+            }, y.send(JSON.stringify(w))
+        }, getCookie: function T(a) {
+            var c, g = new RegExp("(^| )" + a + "=([^;]*)(;|$)");
+            return (c = document.cookie.match(g)) ? c[2] : null
+        }, setCookie: function _(a, c) {
+            var g = 30, exp = new Date;
+            exp.setTime(exp.getTime() + 24 * g * 60 * 60 * 1e3), document.cookie = a + "=" + encodeURI(c) + ";expires=" + exp.toGMTString()
+        }, is_ios: function A() {
+            return /iphone|ipad|ipod/i.test(navigator.userAgent)
+        }, is_android: function N() {
+            return /Android/i.test(navigator.userAgent)
+        }, is_weixin: function I() {
+            return /MicroMessenger/i.test(navigator.userAgent)
+        }, is_qq: function O() {
+            return /MQQBrowser/gi.test(navigator.userAgent)
+        }, is_weibo: function j() {
+            return /Weibo/i.test(navigator.userAgent)
+        }, send: function E(a) {
+            var c = this.generateCallId(), g = a.callback, h = Object.assign(a, {callback: "_" + c, callid: c});
+            window["_" + c] = function (a) {
+                g && g(JSON.parse(a))
+            }, this.postMessage(h)
+        }, postMessage: function J(a) {
+            var c = JSON.stringify(a);
+            this.is_ios() ? window.webkit.messageHandlers.jsRequest.postMessage(a) : window.hc.postMessage(c)
+        }, generateCallId: function Q() {
+            var a = "xxxxxxxxxxxx".replace(/[xy]/g, function (a) {
+                var r = 16 * Math.random() | 0, c = "x" == a ? r : 3 & r | 8;
+                return c.toString(16)
+            });
+            return a
+        }, saveImage: function H(a, c) {
+            this.send({cmd: "basic/save_img", args: a, callback: c})
+        }, openShare: function U(a, c) {
+            this.send({cmd: "page/open_share", args: a, callback: c})
+        }, getCuid: function L(a, c) {
+            this.send({cmd: "account/get_cuid", args: a, callback: c})
+        }
+    };
+    a.global || (a.global = {}), a.global._ = c
+}(window);</script>
+
+<script src="js/three.min_90ffc0b.js"></script>
+<script src="js/baidu-vr_7071b3d.js"></script>
+<script src="js/md5.min_870d259.js"></script>
+<script src="js/show_27c9054.js"></script>
+
+</body>
+</html>

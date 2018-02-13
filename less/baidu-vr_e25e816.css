@@ -1,0 +1,104 @@
+.baidu-vr-container {
+    position: relative;
+    height: 100%;
+    background: #000
+}
+
+.baidu-vr-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0
+}
+
+.baidu-vr-loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0
+}
+
+.baidu-vr-loading span {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    top: 50%;
+    left: 50%;
+    margin: -40px -40px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, .2);
+    line-height: 80px;
+    text-align: center;
+    font-size: 12px;
+    color: #fff
+}
+
+.baidu-vr-video-controls {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background: rgba(225, 225, 224, .1);
+    display: none
+}
+
+.baidu-vr-video-controls .play-status-control {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 26px;
+    height: 26px
+}
+
+.baidu-vr-video-controls .play-status-control .icon {
+    display: block;
+    width: 26px;
+    height: 26px;
+    color: #fff;
+    display: none
+}
+
+.baidu-vr-video-controls .play-status-control.isPause .play {
+    display: block
+}
+
+.baidu-vr-video-controls .play-status-control.isPlay .pause {
+    display: block
+}
+
+.baidu-vr-video-controls .play-progress {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    top: 0;
+    left: 0;
+    background: #000
+}
+
+.baidu-vr-video-controls .play-progress .load-percent {
+    position: absolute;
+    width: 0;
+    height: 100%;
+    background: #666
+}
+
+.baidu-vr-video-controls .play-progress .play-percent {
+    position: absolute;
+    width: 0;
+    height: 100%;
+    background: #2196f3
+}
+
+.baidu-vr-video-controls .play-progress .play-percent:after {
+    content: '';
+    position: absolute;
+    right: -3px;
+    top: -3px;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background: #03a9f4
+}

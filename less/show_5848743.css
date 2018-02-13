@@ -1,0 +1,215 @@
+html,
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+@media all and (min-width: 768px) {
+  html {
+    font-size: 24px;
+  }
+}
+#panoCanvas {
+  position: relative;
+  height: 100%;
+}
+.loading-layer {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background: rgba(0, 0, 0, 0.7) top center no-repeat;
+  z-index: 3;
+}
+.loading-layer.timeout {
+  display: block;
+  background-image: url("../assets/loading-show1_3922b4b.png");
+  background-size: cover;
+}
+.loading-layer.complete {
+  display: block;
+  background-image: url("../assets/loading-show2_431115d.png");
+  background-size: cover;
+}
+@keyframes loading {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  30%,
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+.ctrl-audio {
+  display: block;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 5px;
+  right: 3px;
+  background: url("../assets/btn-audio_596b9b3.png") center center no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+.ctrl-share {
+  display: none;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 45px;
+  right: 3px;
+  background: url("../assets/btn-share_5b457fd.png") center center no-repeat;
+  background-size: contain;
+  z-index: 5;
+}
+.button-box {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  height: 6.61111111rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  padding: 0 4.16666667rem;
+}
+.button-box button {
+  background-size: contain;
+  outline: none;
+  border: none;
+  position: relative;
+}
+.button-box .btn-again {
+  width: 6rem;
+  height: 3.61111111rem;
+  background: url("../assets/btn-again-1_ad810b6.png") center center no-repeat;
+  background-size: contain;
+}
+.button-box .btn-download {
+  width: 6rem;
+  height: 3.61111111rem;
+  background: url("../assets/btn-download-1_b47c791.png") center center no-repeat;
+  background-size: contain;
+}
+.gift-wrap {
+  position: absolute;
+  display: none;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 3;
+}
+.gift-wrap .gift {
+  position: relative;
+  width: 18rem;
+  height: 22.66666667rem;
+  margin: 0 auto;
+  margin-top: 4.16666667rem;
+  background-size: contain;
+}
+.gift-wrap .gift .btn-close {
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 auto;
+  margin-top: 20rem;
+  background: url("../assets/btn-close_3c63cc9.png") center center no-repeat;
+  background-size: contain;
+}
+.gift-wrap .gift .btn-open {
+  position: relative;
+  display: block;
+  width: 8.13888889rem;
+  height: 2.75rem;
+  top: 16.38888889rem;
+  left: 4.94444444rem;
+}
+.gift-wrap .gift-glass {
+  background: url("../assets/gift-glass_2e4ec0f.png") center center no-repeat;
+  background-size: contain;
+}
+.gift-wrap .gift-glass .btn-open {
+  opacity: 0;
+  background: transparent;
+}
+.gift-wrap .gift-glass #gift-code {
+  display: block;
+  position: relative;
+  top: 7.5rem;
+  left: 4.30555556rem;
+  width: 9.38888889rem;
+  height: 1.44444444rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 0.19444444rem;
+  color: #76000c;
+  text-align: center;
+}
+.gift-wrap .gift-discount {
+  background: url("../assets/gift-discount_c6fe46b.png") center center no-repeat;
+  background-size: contain;
+}
+.gift-wrap .gift-discount .btn-open {
+  background: url("../assets/btn-glass-1_b4ccf45.png") center center no-repeat;
+  background-size: contain;
+}
+.gift-wrap .gift-discount #gift-code {
+  display: block;
+  position: relative;
+  top: 7.77777778rem;
+  left: 4.30555556rem;
+  width: 9.38888889rem;
+  height: 1.44444444rem;
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: #76000c;
+  text-align: center;
+}
+.vr-alert {
+  position: absolute;
+  display: none;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 4;
+}
+.vr-alert div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: -24px auto;
+  background: url("../assets/vr-alert_03ee0d8.png") center top no-repeat;
+  background-size: contain;
+}
+.vr-alert .alert-close {
+  display: block;
+  width: 6.86111111rem;
+  height: 2.69444444rem;
+  position: absolute;
+  top: 12.5rem;
+  left: 6.13888889rem;
+  background: url("../assets/alert-close_dc263ab.png") center center no-repeat;
+  background-size: contain;
+}
+.vr-alert .alert-close:active {
+  background: url("../assets/alert-close-2_6779a95.png") center center no-repeat;
+  background-size: contain;
+}
